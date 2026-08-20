@@ -52,3 +52,21 @@ laboratorios/
 
 └── laboratorio-5/
 
+
+
+\## Objetivos del repositorio
+
+
+
+Este repositorio permitirá:
+
+
+
+\- Organizar los trabajos evaluativos del curso.
+
+\- Mantener los ejercicios realizados en clase.
+
+\- Guardar herramientas para realizar mediciones de rendimiento.
+
+\- Llevar un historial de cambios mediante Git.
+
