@@ -1,18 +1,54 @@
-\# Curso - Análisis de Algoritmos
+\# Curso de Análisis de Algoritmos
 
 
 
-Repositorio del curso de Análisis de Algoritmos.
+Repositorio utilizado durante el semestre para almacenar los trabajos,
+
+ejercicios y recursos relacionados con el curso de Análisis de Algoritmos.
 
 
 
-\## Estructura
+\## Estructura del repositorio
 
 
 
-\- laboratorios/: informes de laboratorio evaluativos.
+Las carpetas principales del proyecto son:
 
-\- ejercicios-clase/: ejercicios y prácticas realizadas durante las sesiones.
 
-\- benchmarks/: scripts para medición de tiempos y generación de gráficas.
+
+\- `laboratorios/`: contiene los informes de los cinco laboratorios evaluativos.
+
+\- `ejercicios-clase/`: contiene los ejercicios y prácticas realizados durante las sesiones de clase.
+
+\- `benchmarks/`: contiene scripts utilizados para medir tiempos de ejecución y generar gráficas.
+
+
+
+\## Organización de los laboratorios
+
+
+
+Durante el semestre se crearán cinco carpetas dentro de `laboratorios/`,
+
+una para cada informe evaluativo.
+
+
+
+La estructura podrá organizarse de la siguiente manera:
+
+
+
+```text
+
+laboratorios/
+
+├── laboratorio-1/
+
+├── laboratorio-2/
+
+├── laboratorio-3/
+
+├── laboratorio-4/
+
+└── laboratorio-5/
 
