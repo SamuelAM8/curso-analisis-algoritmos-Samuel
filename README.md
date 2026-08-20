@@ -70,3 +70,13 @@ Este repositorio permitirá:
 
 \- Llevar un historial de cambios mediante Git.
 
+
+
+
+
+\## Información del autor
+
+
+
+Repositorio académico desarrollado para el curso de Análisis de Algoritmos.
+
