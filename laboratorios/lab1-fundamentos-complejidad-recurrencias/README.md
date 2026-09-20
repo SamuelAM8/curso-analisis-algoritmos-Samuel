@@ -5,19 +5,24 @@ Samuel Arango Montoya
 ## Instrucciones para reproducir el experimento
 
 1. Abra una terminal en la carpeta `laboratorios/lab1-fundamentos-complejidad-recurrencias`.
-2. Cree y active el entorno virtual:
+2. Cree y active el entorno virtual **en una ruta corta, fuera de la carpeta del proyecto** (evita el error de rutas largas de Windows, `WinError 206`):
 
 ```bash
-python -m venv venv
-venv\Scripts\activate
+python -m venv C:\venvs\lab1
+C:\venvs\lab1\Scripts\activate
 pip install matplotlib
 ```
+
+En PowerShell, la activación es `C:\venvs\lab1\Scripts\Activate.ps1`.
+
+> **Nota (Windows):** si `pip install` falla con `WinError 206`, la ruta del entorno es demasiado larga.
+> Cree el entorno más cerca de la raíz del disco, como en el comando anterior.
 
 3. Ejecute cada parte:
 
 ```bash
-python parte3_casos.py       # genera graficas/parte3_comparaciones.png y graficas/parte3_tiempo.png
-python parte4_complejidad.py # genera graficas/parte4_tiempo.png
+python parte3_casos.py        # genera graficas/parte3_comparaciones.png y graficas/parte3_tiempo.png
+python parte4_complejidad.py  # genera graficas/parte4_tiempo.png
 ```
 
 ## Parte 1 — Analizar el algoritmo antes de comprar hardware
