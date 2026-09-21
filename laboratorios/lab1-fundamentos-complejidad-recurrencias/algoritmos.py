@@ -49,6 +49,14 @@ def merge_sort(datos: list[int]) -> tuple[list[int], int]:
     comparaciones = 0
 
     def _merge_sort(sub: list[int]) -> list[int]:
+        """Divide la sublista por la mitad, la ordena y combina las mitades.
+
+        Args:
+            sub: sublista a ordenar.
+
+        Returns:
+            Una lista nueva con los elementos de sub, de mayor a menor.
+        """
         nonlocal comparaciones
         if len(sub) <= 1:
             return sub
@@ -60,6 +68,15 @@ def merge_sort(datos: list[int]) -> tuple[list[int], int]:
         return _merge(izquierda, derecha)
 
     def _merge(izquierda: list[int], derecha: list[int]) -> list[int]:
+        """Mezcla dos listas ya ordenadas de mayor a menor en una sola.
+
+        Args:
+            izquierda: primera lista, ordenada de mayor a menor.
+            derecha: segunda lista, ordenada de mayor a menor.
+
+        Returns:
+            Una lista nueva con todos los elementos, de mayor a menor.
+        """
         nonlocal comparaciones
         resultado = []
         i = j = 0
