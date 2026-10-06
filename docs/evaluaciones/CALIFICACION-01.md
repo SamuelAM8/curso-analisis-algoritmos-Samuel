@@ -11,11 +11,11 @@ Muy buen trabajo: el informe está completo, ordenado y apoyado en sus propias m
 |---|---|
 | Corrección conceptual | 22 / 25 |
 | Calidad de la explicación teórica | 23 / 25 |
-| Corrección de la implementación | 18 / 20 |
+| Corrección de la implementación | 19 / 20 |
 | Calidad del análisis de las gráficas | 17 / 20 |
 | Documentación y organización del informe | 8 / 10 |
-| **Total** | **88 / 100** |
-| **Nota (0–5)** | **4.40** |
+| **Total** | **89 / 100** |
+| **Nota (0–5)** | **4.45** |
 
 ## 1. Corrección conceptual (22 / 25)
 **Lo que hizo bien:**
@@ -39,7 +39,7 @@ Muy buen trabajo: el informe está completo, ordenado y apoyado en sus propias m
 **Lo que puede mejorar:**
 - Para el caso promedio de insertion sort dice que cada elemento recorre "la mitad"; mostrar la suma (n(n−1)/4) paso a paso lo haría más sólido.
 
-## 3. Corrección de la implementación (18 / 20)
+## 3. Corrección de la implementación (19 / 20)
 **Lo que hizo bien:**
 - `insertion_sort` y `merge_sort` ordenan bien, no cambian la lista recibida, cuentan solo comparaciones entre elementos y no usan `sorted()` ni `sort()`.
 - La mezcla de merge sort es propia y recursiva; hay tipos y explicaciones en cada función.
@@ -47,7 +47,6 @@ Muy buen trabajo: el informe está completo, ordenado y apoyado en sus propias m
 
 **Lo que puede mejorar:**
 - En `generar_casi_ordenado`, el 2 % final son los valores más pequeños, así que casi no hay trabajo extra para el algoritmo. Lo reconoce en el informe, pero un 2 % con valores repartidos en todo el rango habría representado mejor el reproceso real.
-- Los tres archivos `.py` terminan sin salto de línea final (detalle de estilo).
 
 ## 4. Calidad del análisis de las gráficas (17 / 20)
 **Lo que hizo bien:**
