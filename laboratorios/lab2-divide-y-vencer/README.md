@@ -64,5 +64,34 @@ Todas las pruebas pasan: el script termina imprimiendo
 
 Código: [medicion.py](medicion.py)
 
-![Tiempo vs tamaño de entrada](graficas/tiempo_vs_n.png)
+![Gráfica lineal de tiempo vs tamaño de entrada para ambos algoritmos](graficas/tiempo_vs_n.png)
 
+![Gráfica en escala logarítmica de tiempo vs tamaño de entrada](graficas/tiempo_vs_n_log.png)
+
+### Cómo medí
+
+Cronometré con `time.perf_counter()` únicamente la llamada al algoritmo;
+los datos se generan antes, fuera del cronómetro. Los datos son enteros
+entre -100 y 100 generados con la semilla fija 42, y en cada tamaño ambos
+algoritmos reciben la misma lista.
+
+Repetí cada medición y reporto la **mediana**, porque los tiempos de pocos
+milisegundos fluctúan por el ruido del sistema operativo y la mediana
+resiste los valores atípicos. La fuerza bruta se repitió 200 veces para
+n ≤ 100, 20 veces para 100 < n ≤ 1000 y 3 veces para n > 1000 (2000, 4000 y 8000), 
+donde cada corrida ya es larga. Divide y vencerás se repitió 21 veces en todos los
+tamaños. Dentro del propio experimento, después de cronometrar, verifico con assert 
+que en cada tamaño ambos algoritmos devuelven la misma suma. Esa comprobación queda fuera del cronómetro. 
+
+### Tiempos medidos
+
+| n | Fuerza bruta (ms) | Divide y vencerás (ms) |
+|---:|---:|---:|
+| 10 | 0,0038 | 0,0103 |
+| 50 | 0,0739 | 0,0685 |
+| 100 | 0,2564 | 0,1434 |
+| 500 | 8,7769 | 1,1051 |
+| 1000 | 28,2785 | 2,3262 |
+| 2000 | 113,5658 | 3,3321 |
+| 4000 | 422,7681 | 6,9088 |
+| 8000 | 1733,4116 | 14,3354 |
