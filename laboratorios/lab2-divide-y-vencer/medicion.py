@@ -4,6 +4,7 @@ import os
 import random
 import statistics
 import time
+from collections.abc import Callable
 
 import matplotlib.pyplot as plt
 
@@ -14,7 +15,7 @@ TAMANOS = [10, 50, 100, 500, 1000, 2000, 4000, 8000]
 
 
 def repeticiones_para(n: int) -> int:
-    """Devuelve cuantas veces repetir la medicion segun el tamano.
+    """Devuelve cuantas veces repetir la fuerza bruta segun el tamano.
 
     Args:
         n: tamano de la entrada.
@@ -30,7 +31,7 @@ def repeticiones_para(n: int) -> int:
     return 3
 
 
-def medir(funcion, *args) -> float:
+def medir(funcion: Callable[..., object], *args: object) -> float:
     """Mide el tiempo de una sola llamada con perf_counter.
 
     Args:
@@ -45,7 +46,9 @@ def medir(funcion, *args) -> float:
     return time.perf_counter() - inicio
 
 
-def mediana_de_tiempos(funcion, repeticiones: int, *args) -> float:
+def mediana_de_tiempos(
+    funcion: Callable[..., object], repeticiones: int, *args: object
+) -> float:
     """Repite la medicion y devuelve la mediana, en segundos.
 
     Args:
@@ -80,7 +83,7 @@ def ejecutar_experimento() -> tuple[list[float], list[float]]:
             subarreglo_fuerza_bruta, reps, datos
         )
         t_dc = mediana_de_tiempos(
-            subarreglo_maximo, reps, datos, 0, n - 1
+            subarreglo_maximo, 21, datos, 0, n - 1
         )
 
         # Verificacion: ambos deben dar la misma suma.
