@@ -53,9 +53,10 @@ random.seed(42)  # reproducible
 for _ in range(200):
     n = random.randint(1, 60)
     lista = [random.randint(-50, 50) for _ in range(n)]
-    esperado = subarreglo_fuerza_bruta(lista)[2]
+    esperado = subarreglo_fuerza_bruta(lista)
     obtenido = divide(lista)
-    assert obtenido[2] == esperado, f"Falla en {lista}"
+    assert obtenido[2] == esperado[2], f"Falla en {lista}"
     assert sum(lista[obtenido[0]:obtenido[1] + 1]) == obtenido[2]
+    assert sum(lista[esperado[0]:esperado[1] + 1]) == esperado[2]
 
 print("Todas las pruebas pasaron")
