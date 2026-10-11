@@ -120,11 +120,11 @@ T(n) = 2T(n/2) + Θ(n), con T(1) = Θ(1)
 
 Por el método maestro, a = 2, b = 2 y f(n) = Θ(n). Como n^(log₂2) = n, f(n) tiene el mismo orden, aplica el caso 2 y T(n) = Θ(n log n).
 
-La fuerza bruta es Θ(n²) por los dos ciclos anidados: el interno va de i hasta n−1, así que son n(n+1)/2 iteraciones de trabajo constante, es decir, Θ(n²).
+La fuerza bruta es Θ(n²) por los dos ciclos anidados: el interno va de i hasta n−1, así que son n(n+1)/2 iteraciones de trabajo constante. Como n(n+1)/2 = n²/2 + n/2, domina el n² y la constante 1/2 no cambia el orden.
 
 ### 2. Lo medido contra lo esperado
 
-En la gráfica lineal la fuerza bruta se dispara (de unos 430 ms en n = 4000 a unos 1830 ms en n = 8000), mientras que divide y vencerás casi no se despega del eje y llega a unos 14 ms en n = 8000. En la gráfica logarítmica la fuerza bruta es una recta más empinada que la de divide y vencerás, que es lo esperable cuando una crece como n² y la otra casi lineal.
+En la gráfica lineal la fuerza bruta se dispara (de unos 430 ms en n = 4000 a unos 1830 ms en n = 8000), mientras que divide y vencerás casi no se despega del eje y llega a unos 14 ms en n = 8000. En la gráfica logarítmica la fuerza bruta es una recta más empinada.
 
 Al duplicar n:
 
@@ -135,9 +135,9 @@ Al duplicar n:
 
 ### 3. Tamaños pequeños
 
-Sí hay un cambio. En n = 10, 20, 30 y 40 gana la fuerza bruta; en n = 30 casi empatan (0,0328 contra 0,0343 ms) y en n = 40 la fuerza bruta gana por poco (0,0406 contra 0,0462 ms). En n = 50 divide y vencerás gana por primera vez (0,0592 contra 0,0676 ms) y desde ahí gana en todos los tamaños mayores. En la gráfica logarítmica las curvas se cruzan entre 40 y 50. No mido valores intermedios, así que solo afirmo ese intervalo; como las diferencias son de 5 a 12 % en centésimas de milisegundo, el cruce podría moverse entre corridas.
+Sí hay un cambio. En n = 10, 20, 30 y 40 gana la fuerza bruta; en n = 30 casi empatan (0,0328 contra 0,0343 ms) y en n = 40 la fuerza bruta gana por poco (0,0406 contra 0,0462 ms). En n = 50 divide y vencerás gana por primera vez (0,0592 contra 0,0676 ms) y desde ahí gana en todos los tamaños mayores. En la gráfica logarítmica las curvas se cruzan entre 40 y 50. Como las diferencias son de 5 a 12 % en centésimas de milisegundo, el cruce podría moverse entre corridas.
 
-La ventaja aparece temprano, no tarde. Divide y vencerás pierde en 10, 20, 30 y 40 porque la recursión tiene costos fijos (llamadas, tuplas, barrido cruzado en cada nivel) que con tan pocos datos pesan más que lo que se ahorra; la fuerza bruta, con dos ciclos simples, sale más barata. En cuanto n crece, el ahorro de Θ(n log n) frente a Θ(n²) supera esos costos.
+La ventaja aparece temprano, no tarde. Divide y vencerás pierde en 10, 20, 30 y 40 porque la recursión tiene costos fijos (llamadas, tuplas, barrido cruzado en cada nivel) que con tan pocos datos pesan más que lo que se ahorra. Al crecer n, el ahorro de n² a n log n supera esos costos.
 
 ### 4. ¿Cuándo conviene dividir?
 
@@ -152,4 +152,4 @@ Recomiendo divide y vencerás. Lo que sigue es una **estimación**, no una medic
 - **Fuerza bruta:** crece como n², entonces ×15.625. 1834,95 ms × 15.625 ≈ 28.671.000 ms, unas 8 horas.
 - **Divide y vencerás:** crece como n log n, entonces el factor es 125 × (19,93 / 12,97) ≈ 192. 14,22 ms × 192 ≈ 2730 ms, unos 3 segundos.
 
-Esto asume que la constante se mantiene y con series tan grandes la memoria y el caché pueden mover los números, pero horas contra segundos no cambia la recomendación. Con las series actuales (unos 2000 días por tienda, cerca de 108 ms en fuerza bruta) ambos sirven, pero con sensores de cientos de miles de registros la fuerza bruta deja de ser viable.
+Esto asume que la constante se mantiene y con series tan grandes la memoria y el caché pueden mover los números, pero horas contra segundos no cambia la recomendación. Con sensores de cientos de miles de registros la fuerza bruta deja de ser viable.
