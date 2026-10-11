@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from subarreglo import subarreglo_fuerza_bruta, subarreglo_maximo
 
 SEMILLA = 42
-TAMANOS = [10, 50, 100, 500, 1000, 2000, 4000, 8000]
+TAMANOS = [10, 20, 30, 40, 50, 100, 500, 1000, 2000, 4000, 8000]
 
 
 def repeticiones_para(n: int) -> int:
@@ -82,8 +82,9 @@ def ejecutar_experimento() -> tuple[list[float], list[float]]:
         t_fb = mediana_de_tiempos(
             subarreglo_fuerza_bruta, reps, datos
         )
+        reps_dc = reps if n <= 100 else 21
         t_dc = mediana_de_tiempos(
-            subarreglo_maximo, 21, datos, 0, n - 1
+            subarreglo_maximo, reps_dc, datos, 0, n - 1
         )
 
         # Verificacion: ambos deben dar la misma suma.
