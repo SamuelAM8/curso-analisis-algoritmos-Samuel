@@ -1,6 +1,6 @@
 # Laboratorio 2 — Dividir y vencer
 
-## Samuel Arango Montoya
+**Nombre:** Samuel Arango Montoya
 
 ## Cómo reproducir el experimento
 
@@ -50,12 +50,14 @@ Además:
 - Probé `suma_cruzada` directamente: en la serie de ocho días da 17, y en
   `[-4, -1, -2, -9]` da -3, lo que confirma que el tramo cruzado toma un
   elemento de cada lado aunque sean negativos.
-- Comprobé que los índices devueltos son coherentes con la suma declarada
-  (`sum(serie[ini:fin + 1]) == suma`).
+-  Comprobé que los índices que devuelve divide y vencerás son coherentes con
+  la suma declarada (`sum(serie[ini:fin + 1]) == suma`) en la serie de ocho
+  días, y que los de ambas funciones lo son en las listas aleatorias.
+- Generé 200 listas aleatorias (semilla fija `42`, longitud entre 1 y 60,
+  valores entre -50 y 50) y verifiqué que ambas funciones dan la misma suma.
 - Comprobé que las funciones no modifican la lista de entrada.
 - Generé 200 listas aleatorias (semilla fija `42`, longitud entre 1 y 60,
-  valores entre -50 y 50) y verifiqué que ambas funciones dan la misma suma
-  y que los índices de divide y vencerás corresponden a esa suma.
+  valores entre -50 y 50) y verifiqué que ambas funciones dan la misma suma.
 
 Todas las pruebas pasan: el script termina imprimiendo
 `Todas las pruebas pasaron`.
@@ -78,10 +80,18 @@ algoritmos reciben la misma lista.
 Repetí cada medición y reporto la **mediana**, porque los tiempos de pocos
 milisegundos fluctúan por el ruido del sistema operativo y la mediana
 resiste los valores atípicos. La fuerza bruta se repitió 200 veces para
-n ≤ 100, 20 veces para 100 < n ≤ 1000 y 3 veces para n > 1000 (2000, 4000 y 8000), 
-donde cada corrida ya es larga. Divide y vencerás se repitió 21 veces en todos los
-tamaños. Dentro del propio experimento, después de cronometrar, verifico con assert 
-que en cada tamaño ambos algoritmos devuelven la misma suma. Esa comprobación queda fuera del cronómetro. 
+n ≤ 100, 20 veces para 100 < n ≤ 1000 y 3 veces para n > 1000 (2000, 4000
+y 8000), donde cada corrida ya es larga. Divide y vencerás se repitió 21
+veces en todos los tamaños. Dentro del propio experimento, después de
+cronometrar, verifico con `assert` que en cada tamaño ambos algoritmos
+devuelven la misma suma. Esa comprobación queda fuera del cronómetro.
+
+La tabla muestra algo de ruido. En divide y vencerás, de n = 1000 a 2000 el
+tiempo se multiplicó por ×1,43 (2,3262 → 3,3321 ms), algo que no tiene
+sentido al duplicar n, porque ya duplicar da ×2. En la fuerza bruta, de
+n = 500 a 1000, el factor fue ×3,22, también por debajo del ×4 esperado.
+Por eso en la Parte 3 uso el par 4000 → 8000, donde los factores fueron más
+estables.
 
 ### Tiempos medidos
 
@@ -102,34 +112,11 @@ que en cada tamaño ambos algoritmos devuelven la misma suma. Esa comprobación 
 
 En `subarreglo_maximo` parto el rango en dos mitades, así que hay 2 subproblemas de tamaño n/2. `suma_cruzada` barre desde el punto medio hacia cada lado y entre los dos recorren los n elementos, o sea que cuesta Θ(n). Comparar las tres sumas es Θ(1). Queda:
 
-T(n) = 2T(n/2) + Θ(n)
+T(n) = 2T(n/2) + Θ(n), con T(1) = Θ(1)
 
-Por el método maestro, a = 2, b = 2 y f(n) = Θ(n). Como n^(log₂2) = n, f(n) tiene el mismo orden, aplica el caso 2 y T(n) = Θ(n log n). Tiene sentido: hay log n niveles de recursión y en cada nivel el trabajo total es Θ(n).
+Por el método maestro, a = 2, b = 2 y f(n) = Θ(n). Como n^(log₂2) = n, f(n) tiene el mismo orden, aplica el caso 2 y T(n) = Θ(n log n).
 
-La fuerza bruta es Θ(n²) por los dos ciclos anidados: el interno va de i hasta n−1, así que son n(n+1)/2 iteraciones de trabajo constante.
-
-### 2. Lo medido contra lo esperado
-
-En la gráfica lineal la fuerza bruta se dispara (de unos 420 ms en n = 4000 a unos 1730 ms en n = 8000), mientras que divide y vencerás casi no se despega del eje y llega a unos 14 ms en n = 8000. En la gráfica logarítmica la fuerza bruta es una recta más empinada que la de divide y vencerás, que es lo esperable cuando una crece como n² y la otra casi lineal.
-
-Al duplicar n:
-
-- 4000 → 8000: fuerza bruta ×4,10 (422,77 → 1733,41 ms); divide y vencerás ×2,07 (6,91 → 14,34 ms).
-- 2000 → 4000: fuerza bruta ×3,72 y divide y vencerás ×2,07.
-
-Θ(n²) predice ×4 y la fuerza bruta dio entre 3,7 y 4,1. Θ(n log n) predice un poco más de ×2 (≈2,17 en 4000 → 8000) y medí 2,07. Coincide en ambos casos; la diferencia la atribuyo al ruido del computador.
-
-## Parte 3 — Análisis
-
-### 1. Recurrencia
-
-En `subarreglo_maximo` parto el rango en dos mitades, así que hay 2 subproblemas de tamaño n/2. `suma_cruzada` barre desde el punto medio hacia cada lado y entre los dos recorren los n elementos, o sea que cuesta Θ(n). Comparar las tres sumas es Θ(1). Queda:
-
-T(n) = 2T(n/2) + Θ(n)
-
-Por el método maestro, a = 2, b = 2 y f(n) = Θ(n). Como n^(log₂2) = n, f(n) tiene el mismo orden, aplica el caso 2 y T(n) = Θ(n log n). Tiene sentido: hay log n niveles de recursión y en cada nivel el trabajo total es Θ(n).
-
-La fuerza bruta es Θ(n²) por los dos ciclos anidados: el interno va de i hasta n−1, así que son n(n+1)/2 iteraciones de trabajo constante.
+La fuerza bruta es Θ(n²) por los dos ciclos anidados: el interno va de i hasta n−1, así que son n(n+1)/2 iteraciones de trabajo constante, es decir, Θ(n²).
 
 ### 2. Lo medido contra lo esperado
 
@@ -143,7 +130,7 @@ Al duplicar n de 4000 a 8000: fuerza bruta ×4,10 (422,77 → 1733,41 ms) y divi
 
 Sí hay un cambio. En n = 10 gana la fuerza bruta (0,0038 contra 0,0103 ms), en n = 50 ya gana divide y vencerás por poco (0,0685 contra 0,0739 ms) y en n = 100 se nota (0,1434 contra 0,2564 ms). En la gráfica logarítmica las curvas se cruzan antes de n = 50. Como no medí entre 10 y 50, solo sé que el cruce está en ese intervalo y podría moverse entre corridas.
 
-La ventaja aparece temprano, no tarde. En n = 10 pierde porque la recursión tiene costos fijos (llamadas, tuplas, barrido cruzado en cada nivel) que con tan pocos datos pesan más que lo que se ahorra; la fuerza bruta, con dos ciclos simples, sale más barata. Apenas n crece, el ahorro de Θ(n log n) frente a Θ(n²) supera esos costos.
+La ventaja aparece temprano, no tarde. En n = 10 pierde porque la recursión tiene costos fijos (llamadas, tuplas, barrido cruzado en cada nivel) que con tan pocos datos pesan más que lo que se ahorra; la fuerza bruta, con dos ciclos simples, sale más barata. En cuanto n crece, el ahorro de Θ(n log n) frente a Θ(n²) supera esos costos.
 
 ### 4. ¿Cuándo conviene dividir?
 
@@ -159,4 +146,3 @@ Recomiendo divide y vencerás. Lo que sigue es una **estimación**, no una medic
 - **Divide y vencerás:** crece como n log n, entonces el factor es 125 × (19,93 / 12,97) ≈ 192. 14,34 ms × 192 ≈ 2750 ms, unos 3 segundos.
 
 Esto asume que la constante se mantiene y con series tan grandes la memoria y el caché pueden mover los números, pero horas contra segundos no cambia la recomendación. Con las series actuales (unos 2000 días por tienda, cerca de 114 ms en fuerza bruta) ambos sirven, pero con sensores de cientos de miles de registros la fuerza bruta deja de ser viable.
-
