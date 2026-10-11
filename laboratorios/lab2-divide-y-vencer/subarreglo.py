@@ -1,3 +1,6 @@
+"""Subarreglo maximo: fuerza bruta y divide y venceras."""
+
+
 def subarreglo_fuerza_bruta(valores: list[float]) -> tuple[int, int, float]:
     """Encuentra la mejor racha probando todos los pares de dias (i, j).
 

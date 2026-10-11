@@ -12,6 +12,10 @@ serie = [-3, 5, -2, 8, -6, 3, 9, -4]
 assert subarreglo_fuerza_bruta(serie)[2] == 17
 assert divide(serie)[2] == 17
 
+assert suma_cruzada(serie, 0, 3, 7)[2] == 17
+# El cruzado debe tomar un elemento de cada lado aunque sean negativos
+assert suma_cruzada([-4, -1, -2, -9], 0, 1, 3)[2] == -3
+
 # 2. Un solo elemento
 assert subarreglo_fuerza_bruta([7])[2] == 7
 assert divide([7])[2] == 7
