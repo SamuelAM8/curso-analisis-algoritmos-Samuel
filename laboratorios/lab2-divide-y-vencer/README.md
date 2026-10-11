@@ -10,3 +10,9 @@ el comando de medición lo añades cuando termines la Parte 2)
 
 Código: [subarreglo.py](subarreglo.py) · [pruebas.py](pruebas.py)
 
+## Parte 2 — Medición y gráfica
+
+Código: [medicion.py](medicion.py)
+
+![Tiempo vs tamaño de entrada](graficas/tiempo_vs_n.png)
+
