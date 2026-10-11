@@ -64,7 +64,6 @@ def suma_cruzada(
     return (indice_izq, indice_der, mejor_izq + mejor_der)
 
 
-
 def subarreglo_maximo(
     valores: list[float], inicio: int, fin: int
 ) -> tuple[int, int, float]:
