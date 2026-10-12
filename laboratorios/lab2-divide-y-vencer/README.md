@@ -7,11 +7,15 @@
 Desde la raíz del repositorio:
 
 ```powershell
+py -m venv venv
 .\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 cd laboratorios\lab2-divide-y-vencer
 python pruebas.py
 python medicion.py
 ```
+
+Si `py` no funciona en tu computador, usa `python -m venv venv`.
 
 ## Parte 1 — Implementación y verificación
 
