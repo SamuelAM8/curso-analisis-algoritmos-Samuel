@@ -1,15 +1,16 @@
-"""Lista enlazada y tabla hash para consultar guias de envio."""
+
+"""Implementacion de lista enlazada y tabla hash para guias de envio."""
 
 
 class Nodo:
-    """Nodo de una lista enlazada que guarda una guia y su estado."""
+    """Representa un nodo de una lista enlazada."""
 
     def __init__(self, guia: int, estado: str) -> None:
-        """Crea un nodo sin siguiente.
+        """Inicializa un nodo con una guia y su estado.
 
         Args:
-            guia: numero de guia del envio.
-            estado: estado actual del envio.
+            guia: Numero de guia del envio.
+            estado: Estado actual del envio.
         """
         self.guia = guia
         self.estado = estado
@@ -17,19 +18,19 @@ class Nodo:
 
 
 class ListaEnlazada:
-    """Lista simplemente enlazada de guias, con insercion al inicio."""
+    """Lista simplemente enlazada con insercion al inicio."""
 
     def __init__(self) -> None:
-        """Crea una lista vacia."""
+        """Inicializa una lista enlazada vacia."""
         self.cabeza: Nodo | None = None
         self.tamano = 0
 
     def insertar(self, guia: int, estado: str) -> None:
-        """Agrega una guia al inicio de la lista.
+        """Inserta una guia al inicio de la lista.
 
         Args:
-            guia: numero de guia del envio.
-            estado: estado actual del envio.
+            guia: Numero de guia del envio.
+            estado: Estado actual del envio.
         """
         nuevo = Nodo(guia, estado)
         nuevo.siguiente = self.cabeza
@@ -37,31 +38,39 @@ class ListaEnlazada:
         self.tamano += 1
 
     def buscar(self, guia: int) -> str | None:
-        """Busca una guia recorriendo la lista.
+        """Busca una guia recorriendo la lista iterativamente.
 
         Args:
-            guia: numero de guia a buscar.
+            guia: Numero de guia que se desea buscar.
 
         Returns:
-            El estado del envio, o None si la guia no existe.
+            El estado del envio si existe, o None si no se encuentra.
         """
         actual = self.cabeza
+
         while actual is not None:
             if actual.guia == guia:
                 return actual.estado
             actual = actual.siguiente
+
         return None
 
 
 class TablaHash:
-    """Tabla hash con encadenamiento y funcion hash por division."""
+    """Tabla hash con encadenamiento y metodo de division."""
 
     def __init__(self, m: int) -> None:
-        """Crea una tabla con m casillas vacias.
+        """Inicializa una tabla hash con m casillas vacias.
 
         Args:
-            m: numero de casillas de la tabla.
+            m: Numero de casillas de la tabla.
+
+        Raises:
+            ValueError: Si el numero de casillas no es positivo.
         """
+        if m <= 0:
+            raise ValueError("El numero de casillas debe ser positivo.")
+
         self.m = m
         self.casillas: list[ListaEnlazada] = [
             ListaEnlazada() for _ in range(m)
@@ -69,43 +78,43 @@ class TablaHash:
         self.tamano = 0
 
     def hash(self, guia: int) -> int:
-        """Calcula la casilla de una guia con el metodo de la division.
+        """Calcula el indice de una guia mediante el metodo de division.
 
         Args:
-            guia: numero de guia.
+            guia: Numero de guia del envio.
 
         Returns:
-            Un indice entre 0 y m - 1.
+            El indice de la casilla, entre 0 y m - 1.
         """
         return guia % self.m
 
     def insertar(self, guia: int, estado: str) -> None:
-        """Inserta una guia en la lista de su casilla.
+        """Inserta una guia en la lista de su casilla correspondiente.
 
         Args:
-            guia: numero de guia del envio.
-            estado: estado actual del envio.
+            guia: Numero de guia del envio.
+            estado: Estado actual del envio.
         """
         indice = self.hash(guia)
         self.casillas[indice].insertar(guia, estado)
         self.tamano += 1
 
     def buscar(self, guia: int) -> str | None:
-        """Busca una guia recorriendo solo la lista de su casilla.
+        """Busca una guia unicamente en su casilla correspondiente.
 
         Args:
-            guia: numero de guia a buscar.
+            guia: Numero de guia que se desea buscar.
 
         Returns:
-            El estado del envio, o None si la guia no existe.
+            El estado del envio si existe, o None si no se encuentra.
         """
         indice = self.hash(guia)
         return self.casillas[indice].buscar(guia)
 
     def factor_carga(self) -> float:
-        """Calcula el factor de carga de la tabla.
+        """Calcula el factor de carga de la tabla hash.
 
         Returns:
-            El cociente entre guias almacenadas y casillas (n / m).
+            La cantidad de elementos dividida entre el numero de casillas.
         """
         return self.tamano / self.m
