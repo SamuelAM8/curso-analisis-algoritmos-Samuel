@@ -68,7 +68,7 @@ Muy buen trabajo: el informe está completo, ordenado y apoyado en sus propias m
 - Las instrucciones de reproducción solo sirven para Windows y crean el entorno fuera del repositorio; el curso pedía el entorno de la raíz del repositorio, con `matplotlib` en `requirements.txt`. Incluya también los pasos para macOS/Linux.
 
 ## ¿El código funciona?
-Sí. Los dos algoritmos ordenan bien (probé listas pequeñas, aleatorias y con repetidos), los scripts corren sin errores y generan las tres gráficas.
+Sí. Los dos algoritmos ordenan bien (con listas pequeñas, aleatorias y con repetidos), los scripts corren sin errores y generan las tres gráficas.
 
 ## Para el próximo laboratorio
 - Diseñe los escenarios de prueba pensando en qué tan realistas son (por ejemplo, el 2 % nuevo repartido en todo el rango).
