@@ -10,6 +10,7 @@ Se necesita Python 3.10 o superior, porque uso anotaciones como Nodo | None. El 
 
 ```powershell
 # 1. Desde la raíz del repositorio, activar el entorno virtual
+python -m venv venv
 venv\Scripts\Activate.ps1
 
 # 2. Instalar las dependencias
