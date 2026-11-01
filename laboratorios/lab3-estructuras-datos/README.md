@@ -99,7 +99,7 @@ Aquí la curva sube despacio hasta α = 4 y se dispara en α = 10.
 
 En la lista, una guía que no existe obliga a mirar los n nodos antes de poder decir que no está: Θ(n).
 
-En la tabla se supone que la función hash reparte las guías de forma uniforme, cada guía puede caer en cualquier casilla con la misma probabilidad (1/m) y sin depender de las otras,así cada cadena queda con n/m = α nodos en promedio. Buscar cuesta calcular la casilla, que es una sola operación, más recorrer esa cadena: Θ(1 + α). Como en mi experimento m crece con n, α se queda constante y el costo es Θ(1),por eso también conviene que m sea primo, para que `k mod m` no se afecte tanto por patrones en las guías. Si todas las guías cayeran en la misma casilla, la tabla sería una sola lista de n nodos y buscar costaría Θ(n), igual que la lista enlazada.
+En la tabla se supone que la función hash reparte las guías de forma uniforme, cada guía puede caer en cualquier casilla con la misma probabilidad (1/m) y sin depender de las otras,así cada cadena queda con n/m = α nodos en promedio. Buscar cuesta calcular la casilla, que es una sola operación, más recorrer esa cadena: Θ(1 + α). Como en mi experimento m crece con n, α se queda constante y el costo es Θ(1),por eso también conviene que m sea primo, para que k mod m no se afecte tanto por patrones en las guías. Si todas las guías cayeran en la misma casilla, la tabla sería una sola lista de n nodos y buscar costaría Θ(n), igual que la lista enlazada.
 
 ### 2. Lo medido contra lo esperado
 
@@ -125,9 +125,9 @@ Un árbol de búsqueda binario sí sirve, baja hasta X y recorre en orden hasta 
 
 ### 5. Concepto para la jefa de operaciones
 
-Recomiendo una combinación: tabla hash (α ≈ 2) para la consulta puntual y un árbol equilibrado AVL o rojo-negro para el rango, ambos actualizados con cada guía nueva.
+Recomiendo una combinación, tabla hash con α ≈ 2 para la consulta puntual y un árbol equilibrado AVL o rojo-negro para el rango, ambos actualizados con cada guía nueva.
 
-Estimación mía para 5.000.000 de envíos, no una medición; no implementé el árbol.
+Estimación mía para 5.000.000 de envíos, no una medición, no implementé el árbol.
 
 Lista: con el costo por nodo estabilizado (≈ 0,125 µs), 5×10⁶ nodos dan cerca de 0,6 s, y hasta 1 s si ese costo siguiera subiendo.
 
