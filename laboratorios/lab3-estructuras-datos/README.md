@@ -98,13 +98,13 @@ Aquí la curva sube despacio hasta α = 4 y se dispara en α = 10.
 
 ### 1. Costo teórico
 
-En la lista, una guía que no existe obliga a mirar los n nodos antes de poder decir que no está: Θ(n).
+En la lista, una guía que no existe obliga a mirar los n nodos antes de poder decir que no está, Θ(n).
 En la tabla se supone que la función hash reparte las guías de forma uniforme, cada guía puede caer en cualquier casilla con la misma probabilidad (1/m) y sin depender de las otras,así cada cadena queda con n/m = α nodos en promedio. Buscar cuesta calcular la casilla más recorrer esa cadena: Θ(1 + α). Como en mi experimento m crece con n, α se queda constante y el costo es Θ(1). Si todas las guías cayeran en la misma casilla, la tabla sería una sola lista de n nodos y buscar costaría Θ(n), igual que la lista enlazada.
 
 ### 2. Lo medido contra lo esperado
 En la primera gráfica, de n = 50.000 a 100.000 (n se duplica) la lista pasó de 6.114,6 a 12.490,3 µs, es decir ×2,04, coherente con Θ(n). En ese tramo la tabla pasó de 0,435 a 0,452 µs (×1,04), coherente con Θ(1).
 La mayor desviación está entre n = 5.000 y n = 20.000: n se multiplica por 4, pero el tiempo de la lista por 2098,5 / 212,8 = ×9,9. El costo por nodo (tiempo / n) es de unos 0,04 µs entre n = 100 y 5.000, sube a 0,105 µs en n = 20.000 y se estabiliza en 0,122 y 0,125 µs en n = 50.000 y 100.000. Es decir, la lista es lineal en los extremos, pero con un costo por nodo unas tres veces mayor al final (0,12 frente a 0,04 µs). Mi hipótesis, que no verifiqué, es un efecto de caché: con pocos nodos la lista cabe en la caché del procesador; con decenas de miles deja de caber y cada salto de puntero llega a una memoria más lenta.
-En la segunda gráfica, de α = 0,25 a α = 10 el valor 1 + α crece unas 9 veces y el tiempo medido unas 8, así que es bastante coherente con Θ(1 + α). Por tramos no calza tan bien: de α = 4 a 10 el tiempo creció ×3,7 (0,492 a 1,813 µs) y 1 + α solo ×2,2 (5 a 11). La misma hipótesis de caché lo explicaría, pero tampoco la comprobé.
+En la segunda gráfica, de α = 0,25 a α = 10 el valor 1 + α crece unas 9 veces y el tiempo medido unas 8, así que es bastante coherente con Θ(1 + α). Por tramos no calza tan bien: de α = 4 a 10 el tiempo creció ×3,7 (0,492 a 1,813 µs) y 1 + α solo ×2,2 (5 a 11). 
 
 ### 3. Colisiones
 Una colisión ocurre cuando dos guías distintas tienen el mismo h(k). Pasa aunque haya más casillas que guías, el número de pares que chocan crece más o menos como n²/(2m). Con 20.000 guías y 80.021 casillas (α = 0,25) igual se esperan unos 2.500 pares. Con m = 7, las guías 10, 24 y 17 dan 3.
@@ -118,7 +118,10 @@ Un árbol de búsqueda binario sí sirve, baja hasta X y recorre en orden hasta 
 ### 5. Concepto para la jefa de operaciones
 Recomiendo una combinación, tabla hash con α ≈ 2 para la consulta puntual y un árbol equilibrado AVL o rojo-negro para el rango, ambos actualizados con cada guía nueva.
 Estimación mía para 5.000.000 de envíos, no una medición, no implementé el árbol.
+
 Lista: con el costo por nodo estabilizado (≈ 0,125 µs), 5×10⁶ nodos dan cerca de 0,6 s, y hasta 1 s si ese costo siguiera subiendo.
+
 Tabla: no sirve una regla de tres, porque la forma es Θ(1), de n = 5.000 a 100.000 (×20) solo subió de 0,297 a 0,452 µs. Estimo entre 0,5 y 1 µs, algo más que en mis datos por la memoria.
+
 Árbol equilibrado: con unos 22 niveles y el costo por nodo de la lista, estimo entre 2 y 4 µs, aunque podría ser algo más por la memoria.
 
