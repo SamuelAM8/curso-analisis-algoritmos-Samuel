@@ -93,9 +93,9 @@ Aquí la curva sube despacio hasta α = 4 y se dispara en α = 10.
 
 ---
 
-### Parte 3 — Análisis
+## Parte 3 — Análisis
 
-## 1. Costo teórico
+### 1. Costo teórico
 
 En la lista, una guía que no existe obliga a mirar los n nodos antes de poder decir que no está: Θ(n).
 En la tabla se supone que la función hash reparte las guías de forma uniforme, cada guía puede caer en cualquier casilla con la misma probabilidad (1/m) y sin depender de las otras,así cada cadena queda con n/m = α nodos en promedio. Buscar cuesta calcular la casilla más recorrer esa cadena: Θ(1 + α). Como en mi experimento m crece con n, α se queda constante y el costo es Θ(1). Si todas las guías cayeran en la misma casilla, la tabla sería una sola lista de n nodos y buscar costaría Θ(n), igual que la lista enlazada.
