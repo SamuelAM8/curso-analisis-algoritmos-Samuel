@@ -6,7 +6,7 @@
 
 ## Cómo reproducir
 
-Se necesita Python 3.10 o superior, porque uso anotaciones como `Nodo | None`. El entorno virtual `venv` y el archivo `requirements.txt` están en la raíz del repositorio.
+Se necesita Python 3.10 o superior, porque uso anotaciones como Nodo | None. El entorno virtual venv y el archivo requirements.txt están en la raíz del repositorio.
 
 ```powershell
 # 1. Desde la raíz del repositorio, activar el entorno virtual
@@ -25,7 +25,7 @@ python pruebas.py
 python medicion.py
 ```
 
-Todas las mediciones las hice en mi computador personal. La medición usa semillas fijas (`SEMILLA = 2026`), así que siempre genera las mismas guías. Los tiempos absolutos pueden salir distintos en otra máquina, pero la forma de las curvas debería coincidir.
+Todas las mediciones las hice en mi computador personal. La medición usa semillas fijas (SEMILLA = 2026), así que siempre genera las mismas guías. Los tiempos absolutos pueden salir distintos en otra máquina, pero la forma de las curvas debería coincidir.
 
 ---
 
@@ -33,13 +33,13 @@ Todas las mediciones las hice en mi computador personal. La medición usa semill
 
 Código: [`estructuras.py`](estructuras.py) · Pruebas: [`pruebas.py`](pruebas.py)
 
-`estructuras.py` tiene Nodo, ListaEnlazada (inserción al inicio en Θ(1) y búsqueda iterativa con while) y TablaHash (encadenamiento con `h(k) = k mod m`), cada casilla de la tabla es una ListaEnlazada y no uso dict,set ni la función hash() de Python.
+estructuras.py tiene Nodo, ListaEnlazada (inserción al inicio en Θ(1) y búsqueda iterativa con while) y TablaHash (encadenamiento con h(k) = k mod m), cada casilla de la tabla es una ListaEnlazada y no uso dict,set ni la función hash() de Python.
 
-En `pruebas.py` verifico con assert lo siguiente:
+En pruebas.py verifico con assert lo siguiente:
 
 1. Búsqueda exitosa e infructuosa en la lista y en la tabla (la guía 24 existe y la 99 devuelve None).
 2. Colisión forzada con m = 7: las guías 10, 24 y 17 caen en la casilla 3, la lista de esa casilla tiene longitud 3 y las tres se recuperan con su estado correcto.
-3. Factor de carga: `factor_carga() == 3 / 7` y `tamano == 3` después de esas inserciones.
+3. Factor de carga: factor_carga() == 3 / 7 y tamano == 3 después de esas inserciones.
 4. 25 colecciones aleatorias, la semilla 42, de 1 a 500 guías, con m elegido entre 7, 101 y 1009. En cada coleccion, ambas estructuras tienen el mismo tamaño, devuelven el estado correcto para todas las guías existentes y devuelven None para 10 guías inexistentes, con m = 7 y 101 las cadenas quedan largas.
 
 En medicion.py tambien se repite una verificación antes de cronometrar, con una muestra de 100 guías existentes comprueba que lista y tabla devuelven el mismo estado.
@@ -111,7 +111,7 @@ En la segunda gráfica, de α = 0,25 a α = 10 el valor 1 + α crece unas 9 vece
 
 ### 3. Colisiones
 
-Una colisión ocurre cuando dos guías distintas tienen el mismo `h(k)`. Pasa aunque haya más casillas que guías, el número de pares que chocan crece más o menos como n²/(2m). Con 20.000 guías y 80.021 casillas (α = 0,25) igual se esperan unos 2.500 pares, así que casi siempre hay colisiones, incluso con α < 1, con m = 7, las guías 10, 24 y 17 dan 3.
+Una colisión ocurre cuando dos guías distintas tienen el mismo h(k). Pasa aunque haya más casillas que guías, el número de pares que chocan crece más o menos como n²/(2m). Con 20.000 guías y 80.021 casillas (α = 0,25) igual se esperan unos 2.500 pares, así que casi siempre hay colisiones, incluso con α < 1, con m = 7, las guías 10, 24 y 17 dan 3.
 
 Con encadenamiento,el que implementé, la casilla 3 guarda una lista con 17, 24 y 10. La ventaja es que la tabla nunca se llena y admite α > 1,el costo son los punteros extra, más memoria y peor localidad.
 
